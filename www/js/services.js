@@ -17,6 +17,9 @@ angular.module('songhop.services', ['ionic.utils'])
 
     ]
   }
+    o.favoriteCount = function() {
+    return o.newFavorites;
+  }
     o.setSession = function(username, session_id, favorites) {
     if (username) o.username = username;
     if (session_id) o.session_id = session_id;
