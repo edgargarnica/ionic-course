@@ -73,10 +73,29 @@ Controller for the discover page
 /*
 Controller for the favorites page
 */
-.controller('FavoritesCtrl', function($scope, User) {
+.controller('FavoritesCtrl', function($scope, User, $window) {
 	$scope.favorites = User.favorites;
 	$scope.removeSong = User.removeSongFromFavorites;
+
+    $scope.openSong = function(song) {
+    $window.open(song.open_url, "_system");
+  }
   
+})
+
+.controller('SplashCtrl', function($scope, $state, User) {
+   $scope.submitForm = function(username, signingUp) {
+    User.auth(username, signingUp).then(function(){
+      // session is now set, so lets redirect to discover page
+      $state.go('tab.discover');
+
+    }, function() {
+      // error handling here
+      alert('Hmm... try another username.');
+
+    });
+  }
+
 })
 
 
